@@ -1,0 +1,93 @@
+#include <iostream>
+using namespace std;
+
+struct ll{
+    int d;
+    ll* next;
+    
+    ll(int value) : d(value), next(nullptr) {}
+};
+
+ll* merge(ll* ll1,ll* ll2){
+    ll *head;
+    ll *ptr=head;
+        while(ll1 && ll2){
+            if(ll1->d < ll2->d){
+                ll* temp;
+                head->d=ll1->d;
+                head->next=temp;
+                head=head->next;
+                ll1=ll1->next;
+            }
+                else {
+                ll* temp;
+                head->d=ll2->d;
+                head->next=temp;
+                head=head->next;
+                ll2=ll2->next;
+            }
+        }
+
+        if(ll1){
+                ll* temp;
+                head->d=ll1->d;
+                head->next=temp;
+                head=head->next;
+                ll1=ll1->next;
+        }
+
+         if(ll2){
+                ll* temp;
+                head->d=ll2->d;
+                head->next=temp;
+                head=head->next;
+                ll2=ll2->next;
+        }
+
+        return ptr;
+}
+
+int main()
+{
+    ll* ll1 = new ll(1);
+    ll1->next = new ll(2);
+    ll1->next->next = new ll(3);
+
+    ll* ll2 = new ll(1);
+    ll2->next = new ll(2);
+
+    ll* ll3 = new ll(2);
+    ll3->next = new ll(4);
+    ll3->next->next = new ll(8);
+    ll3->next->next->next = new ll(9);
+    
+    ll* ll4 = new ll(5);
+    
+    ll* ll5 = new ll(3);
+    ll5->next = new ll(4);
+    ll5->next->next = new ll(5);
+
+    
+    ll* lls[5];
+
+    lls[0] = ll1;
+    lls[1] = ll2;
+    lls[2] = ll3;
+    lls[3] = ll2;
+    lls[4] = ll3;
+    
+    ll* head=lls[0];
+    
+    for(int i=1;i<4;i++)
+    {
+        head=merge(head,lls[i]);
+        cout<<i<<" ";
+    }
+    
+
+    while(head)
+    {
+        cout<<head->d;
+        head=head->next;
+    }
+}
