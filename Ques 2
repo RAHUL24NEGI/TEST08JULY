@@ -1,0 +1,25 @@
+#include <iostream>
+using namespace std;
+
+bool isprime(int n){
+    if(n<2)return false;
+    for(int i=2;i<=n/2;i++)
+        if(n%i==0)return false;
+    return true;
+}
+
+int main()
+{
+    int t;
+    cout<<"No of test cases :";
+    cin>>t;
+    while(t--){
+        int x,y,z;
+        cout<<" 1st field:";cin>>x;
+        cout<<" 2nd field:";cin>>y;
+        int n=x+y+1;
+        while(!(isprime(n)))n++;
+        n-=(x+y);
+        cout<<"  3rd field potatoes :"<<n<<endl;
+    }
+}
